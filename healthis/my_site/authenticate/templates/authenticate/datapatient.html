@@ -1,0 +1,96 @@
+{% extends 'authenticate/base.html' %} {% block content %} {% load static %}
+<div class="border p-3 mt-5 mr-5 ml-5">
+  <div class="container-fluid formDatapatient">
+    <h1 class="text-center m-4">Dados Usuário</h1>
+    <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-row mb-2">
+            <div class="form-group col-md-4 ">
+              <label>{{ form.first_name.label }}</label>
+              {{ form.first_name }}
+            </div>
+            <div class="form-group col-md-6 ">
+              <label>{{ form.last_name.label }}</label>
+              {{ form.last_name }}
+            </div>
+            <div class="form-group col-md-2 ">
+              <label>{{ form.date_of_birth.label }}</label>
+              {{ form.date_of_birth }}
+            </div>
+        </div>
+        <div class="form-row mb-2">
+            <div class="form-group col-md-6">
+              <label>{{ form.email.label }}</label>
+              {{ form.email }}
+            </div>
+            <div class="form-group col-md-3">
+              <label>{{ form.phonenumber.label }}</label>
+              {{ form.phonenumber }}
+            </div>
+            <div class="form-group col-md-3">
+              <label>{{ form.landline_phonenumber.label }}</label>
+              {{ form.landline_phonenumber }}
+            </div>
+        </div>
+        <div class="form-row mb-2">
+            <div class="form-group col-md-9">
+              <label>{{ form.zipcode.label }}</label>
+              {{ form.zipcode }}
+            </div>
+            <div class="form-group col-md-3">
+              <label>{{ form.address.label }}</label>
+              {{ form.address }}
+            </div>
+        </div>
+        <div class="form-row mb-2">
+            <div class="form-group col-md-2">
+              <label>{{ form.complement.label }}</label>
+              {{ form.complement }}
+            </div>
+            <div class="form-group col-md-3">
+              <label>{{ form.neighborhood.label }}</label>
+              {{ form.neighborhood }}
+            </div>
+            <div class="form-group col-md-6">
+              <label>{{ form.city.label }}</label>
+              {{ form.city }}
+            </div>
+            <div class="form-group col-md-1">
+              <label>{{ form.state.label }}</label>
+              {{ form.state }}
+            </div>
+        </div>
+        <div class="form-group row justify-content-center flex-column  mt-5 ">
+            <div class="d-flex justify-content-end pl-2 mr-3 ">
+              <input class="btn btn-primary mr-3" type="submit" value="Salvar" />
+              <a href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-info">Voltar</a>
+              <!--<input class="btn btn-btn-secondary" type="button" value="Voltar" onclick="history.back()" />-->
+            </div>
+    </form>
+  </div>
+</div>
+
+
+
+    <script>
+        // Exemplo de JavaScript inicial para desativar envios de formulário, se houver campos inválidos.
+        (function() {
+            'use strict';
+            /*window.addEventListener('load', function() {
+              // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+              var forms = document.getElementsByClassName('needs-validation');
+              // Faz um loop neles e evita o envio
+              var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add('was-validated');
+                }, false);
+              });
+            }, false);*/
+        })();
+    </script>
+    {% endblock %}

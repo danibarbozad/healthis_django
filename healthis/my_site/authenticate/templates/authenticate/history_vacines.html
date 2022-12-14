@@ -1,0 +1,95 @@
+{% extends 'authenticate/base.html' %}
+{% block content %}
+	{% load static %}
+    
+<div class="border p-3 mt-5">
+    <h1 class ="text-center m-2">Histórico de Vacinas</h1>
+    <table class="table table-bordered table-striped ">
+        <thead>
+          <tr>
+            <th scope="col">Data</th>
+            <th scope="col">Vacina</th>
+            <th scope="col">Laboratório</th>
+            <th scope="col">Dose</th>
+            <th scope="col">lote</th>
+            <th scope="col">Cód. Vacinador</th>
+            <th scope="col">Estabelecimento Saúde</th>
+           
+          </tr>
+        </thead>
+        <tbody >
+          <tr >
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="align-self-center text-center p-0 ">
+                <a class="btn btn-primary btn-sm p-0" 
+                href="#" >Editar</a>
+                <a 
+                class="btn btn-danger btn-sm p-0"
+                href="#" 
+                data-toggle="modal" 
+                data-target="#delete-modal">Excluir</a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="align-self-center text-center p-0 ">
+                <a class="btn btn-primary btn-sm p-0" 
+                href="#" >Editar</a>
+                <a 
+                class="btn btn-danger btn-sm p-0"
+                href="#" 
+                data-toggle="modal" 
+                data-target="#delete-modal">Excluir</a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="align-self-center text-center p-0 ">
+                <a class="btn btn-primary btn-sm p-0" 
+                href="#" >Editar</a>
+                <a 
+                class="btn btn-danger btn-sm p-0"
+                href="#" 
+                data-toggle="modal" 
+                data-target="#delete-modal">Excluir</a>
+            </td>
+           <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="align-self-center text-center p-0 ">
+                <a class="btn btn-primary btn-sm p-0" 
+                href="#" >Editar</a>
+                <a 
+                class="btn btn-danger btn-sm p-0"
+                href="#" 
+                data-toggle="modal" 
+                data-target="#delete-modal">Excluir</a>
+            </td>
+        </tbody>
+      </table>
+    
+</div>
+{% endblock %}

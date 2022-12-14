@@ -1,0 +1,113 @@
+{% extends 'authenticate/base.html' %}
+{% block content %}
+{% load static %}
+<section class="mb-5">
+    <form method="POST" action="{% url 'vacines' %}{{vacine.id}}" class="border p-3">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="date">Data</label>
+                <input 
+                    type="date" 
+                    class="form-control" 
+                    id="date" 
+                    name="date"
+                    value="{{vacine.date}}" 
+                    required
+                >
+            </div>
+            <div class="form-group col-md-4">
+                <label for="vacine">Vacina</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="vacine" 
+                    name="vacine"
+                    value="{{vacine.vacine}}" 
+                    required
+                >
+            </div>
+            <div class="form-group col-md-4">
+                <label for="dose">Dose</label>
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    id="dose" 
+                    name="dose" 
+                    min="1" 
+                    max="3"
+                    value="{{vacine.dose}}" 
+                    required
+                >
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="batch">Código do lote</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="batch" 
+                    name="batch" 
+                    onkeypress='validateKeyNumbers(event)'
+                    value="{{vacine.batch}}"
+                    required
+                >
+            </div>
+            <div class="form-group col-md-4">
+                <label for="vaccinator">Código do aplicador</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="vaccinator" 
+                    name="vaccinator"
+                    onkeypress='validateKeyNumbers(event)'
+                    value="{{vacine.vaccinator}}"
+                    required 
+                >
+            </div>
+            <div class="form-group col-md-4">
+                <label for="healthcenter">Estabelecimento de saúde</label>
+                <input 
+                    type="text"
+                    class="form-control" 
+                    id="healthcenter" 
+                    name="healthcenter"
+                    value="{{vacine.healthcenter}}"
+                    required
+                >
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                <label class="form-check-label" for="gridCheck">
+                Dados conferidos
+                </label>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Editar</button>
+        <a href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-info">Voltar</a>
+    </form>
+</section>
+<script>
+    function validateKeyNumbers(evt) {
+        var theEvent = evt || window.event;
+      
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+        // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if( !regex.test(key) ) {
+          theEvent.returnValue = false;
+          if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+      }
+</script>
+{% endblock %}

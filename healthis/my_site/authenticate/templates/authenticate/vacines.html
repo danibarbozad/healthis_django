@@ -1,0 +1,198 @@
+{% extends 'authenticate/base.html' %} {% block content %} {% load static %}
+<section class="mb-5">
+  <form method="POST" action="{% url 'vacines' %}" class="border p-3">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="date">Data</label>
+        <input
+          type="date"
+          class="form-control"
+          id="date"
+          name="date"
+          required
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="vacine">Vacina</label>
+        <input
+          type="text"
+          class="form-control"
+          id="vacine"
+          name="vacine"
+          required
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="dose">Dose</label>
+        <input
+          type="number"
+          class="form-control"
+          id="dose"
+          name="dose"
+          min="1"
+          max="3"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="batch">Código do lote</label>
+        <input
+          type="text"
+          class="form-control"
+          id="batch"
+          name="batch"
+          onkeypress="validateKeyNumbers(event)"
+          required
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="vaccinator">Código do aplicador</label>
+        <input
+          type="text"
+          class="form-control"
+          id="vaccinator"
+          name="vaccinator"
+          onkeypress="validateKeyNumbers(event)"
+          required
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="healthcenter">Estabelecimento de saúde</label>
+        <input
+          type="text"
+          class="form-control"
+          id="healthcenter"
+          name="healthcenter"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="gridCheck"
+          required
+        />
+        <label class="form-check-label" for="gridCheck">
+          Dados conferidos
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+</section>
+<section>
+  <div class="mb-4 head-vacines d-flex justify-content-center">
+    <h3>Agenda vacinas</h3>
+  </div>
+  <table class="table mb-5">
+    <thead class="thead-white">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Data</th>
+        <th scope="col">Vacina</th>
+        <th scope="col">Dose</th>
+        <th scope="col">Lote</th>
+        <th scope="col">Cod Aplicador</th>
+        <th scope="col">Cod Estabelecimento</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vacine in vacines %}
+      <tr>
+        <th scope="row">{{vacine.id}}</th>
+        <td>{{ vacine.date }}</td>
+        <td>{{ vacine.vacine }}</td>
+        <td>{{ vacine.dose }}</td>
+        <td>{{ vacine.batch }}</td>
+        <td>{{ vacine.applicator }}</td>
+        <td>{{ vacine.healthcenter }}</td>
+        <td>
+          <a href="{% url 'vacines' %}{{ vacine.id }}" class="btn btn-success"
+            >Editar</a
+          >
+          {% comment %}
+          <a
+            onclick="deleteAlert({{ vacine.id }})"
+            href="{% url 'vacines' %}delete/{{ vacine.id }}"
+            class="btn btn-danger"
+            >Deletar</a
+          >
+          {% endcomment %}
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-toggle="modal"
+            data-target="#deleteModal{{vacine.id}}"
+          >
+            Deletar
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% for vacine in vacines %}
+<div
+  class="modal fade"
+  id="deleteModal{{vacine.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deseja realmente excluir o item de id {{vacine.id}}?</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Voltar
+        </button>
+        <a
+            href="{% url 'vacines' %}delete/{{ vacine.id }}"
+            class="btn btn-danger"
+            >Deletar</a
+          >
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<script>
+  const validateKeyNumbers = (evt) => {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  };
+</script>
+{% endblock %}

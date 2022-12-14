@@ -1,0 +1,160 @@
+{% extends 'authenticate/base.html' %}
+{% block content %}
+	{% load static %}
+
+    
+    <section>
+        <h1 class ="text-center"> Inserir dados de saúde </h1>
+        <div class="d-flex justify-content-end pl-2 mb-2 col-12">
+           
+        <div class="date col-2 ">
+            <label for="date">Data</label>
+            <input 
+                    type="date" 
+                    class="form-control" 
+                    id="date" 
+                    name="date" 
+                    value="{{data_health.date}}"
+                    required
+                >
+        </div>
+        </div>
+        
+        <form method="POST" action="{% url 'data_health' %}{{data_health.id}}" class="border p-3 ">
+          {% csrf_token %}
+          <h1 class ="text-center">Cálculo IMC </h1>
+          <div class="form-row d-flex justify-content-between ">
+            <div class="form-group col-md-3">
+                <label for="altura">Insira altura:</label>
+                <input 
+                    type="number" step="0.01" 
+                    class="form-control" 
+                    id="height" 
+                    name="height" 
+                    value="{{height.date}}"
+                    placeholder="cm"
+                    required
+                >
+          
+            </div>
+            <div class="form-group col-md-3">
+                <label for="peso">Insira peso:</label>
+                <input 
+                type="number" step="0.01"
+                class="form-control" 
+                id="weight" 
+                name="weight"
+                value="{{weight.date}}" 
+                placeholder="kg"
+                required
+            >
+            </div>
+            <div class="form-group col-md-3">
+                <label for="imc">IMC é:</label>
+                <input 
+                type="number" step="0.01"
+                class="form-control" 
+                id="imc" 
+                name="imc" 
+                value="{{imc.date}}"
+                required
+            >
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-primary mt-3 ">Enviar</button>
+            </div>
+            
+        </div>
+        </form>
+
+    </section>
+    <section>
+        <form method="POST" action="" class="border p-3 mt-2">
+          {% csrf_token %}
+          <h1 class ="text-center"> Pressão Arterial </h1>
+          <div class="form-row d-flex justify-content-between ">
+            <div class="form-group col-md-3">
+                <label for="sistolica">Sistólica</label>
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    id="systolic" 
+                    name="systolic"
+                    value="{{systolic.date}}" 
+                    placeholder="mm hg(máx)"
+                    required
+                >
+          
+            </div>
+            <div class="form-group col-md-3">
+                <label for="diastolica">Diastólica:</label>
+                <input 
+                type="number"
+                class="form-control" 
+                id="diastolic" 
+                name="diastolic" 
+                value="{{diastolic.date}}"
+                placeholder="mm hg(mín)"
+                required
+            >
+            </div>
+            <div class="form-group col-md-3">
+                <label for="batimentos">Batimentos:</label>
+                <input 
+                type="number"
+                class="form-control" 
+                id="beats" 
+                name="beats"
+                value="{{beats.date}}"
+                placeholder="por minuto" 
+                required
+            >
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-primary mt-3 ">Enviar</button>
+            </div>
+            
+        </div>
+        </form>
+
+    </section>
+    <section>
+        <form method="POST" action="" class="border p-3 mt-2">
+          {% csrf_token %}
+          <h1 class ="text-center"> Glicemia </h1>
+          <div class="form-row d-flex justify-content-between ">
+            <div class="form-group col-md-3">
+                <label for="glicemia">Glicemia Jejum:</label>
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    id="glucose" 
+                    name="glucose" 
+                    value="{{glucose.date}}"
+                    placeholder="mg/dL"
+                    required
+                >
+          
+            </div>
+            <div class="form-group col-md-3">
+                <label for="hemoglobina">Hemoglobina Glicada - A1C:</label>
+                <input 
+                type="number" step="0.01"
+                class="form-control" 
+                id="hemoglobin" 
+                name="hemoglobin" 
+                value="{{hemoglobin.date}}"
+                placeholder="%"
+                required
+            >
+            </div>
+            
+            <div class="">
+                <button type="submit" class="btn btn-primary mt-3 ">Enviar</button>
+            </div>
+            
+        </div>
+        </form>
+    </section>
+    
+{% endblock %}

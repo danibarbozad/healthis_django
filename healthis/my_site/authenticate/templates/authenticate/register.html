@@ -1,0 +1,32 @@
+{% extends 'authenticate/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class = " container container-login col-md-6 py-3 border mb-5 " > 
+	
+	<div class="d-flex justify-content-center">
+		<img src="{% static 'img/logo.png' %}" class="img-fluid" alt="">
+	</div> 
+	<h2 class ="text-center m-3"> Registrar </h2>
+<form method="POST" action="{% url 'register' %}">
+		{% csrf_token %}
+		{% if form.errors %}
+		<div class="alert alert-danger alart-dismissable" role ="">
+                <button class="close" data-dismiss="alert">
+                    <small><sup>x</sup></small>
+                  </button>
+               {% for field in form%}
+               	{% if field.errors%}
+               		{{field.errors}}
+               	{% endif%}
+               	{% endfor %}
+              </div>
+		{% endif %}
+		{{ form.as_p }}
+		<div class="text-center ">
+		<input type="submit" value="Registrar" class="button register">
+	</div>
+	</form>
+
+</div>
+{% endblock %}

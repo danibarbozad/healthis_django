@@ -1,0 +1,13 @@
+
+pip install Django
+pip install django-two-factor-auth
+pip install django-cors-headers
+pip install django-bootstrap4
+pip install django-otp
+pip install django-otp-yubikey
+pip install django-two-factor-auth[phonenumbers]
+
+na raiz do projeto
+python my_site/manage.py migrate
+
+python my_site/manage.py runserver 
